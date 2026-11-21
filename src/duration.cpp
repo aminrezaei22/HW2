@@ -10,3 +10,8 @@ Duration::Duration(int minutes, int seconds) : m_total_seconds(minutes * 60 + se
 int Duration::total_seconds() const {
     return m_total_seconds;
 }
+
+Duration Duration::operator+(const Duration& other) const {
+    // Going through the constructor keeps the invariant check in one place.
+    return Duration(0, m_total_seconds + other.m_total_seconds);
+}

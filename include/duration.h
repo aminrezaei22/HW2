@@ -23,6 +23,13 @@ public:
      */
     int total_seconds() const;
 
+    /**
+     * @brief Adds two durations without changing either one.
+     * @param other Duration to add to this one.
+     * @return A new Duration holding the combined time.
+     */
+    Duration operator+(const Duration& other) const;
+
 private:
     int m_total_seconds;
 };
