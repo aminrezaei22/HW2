@@ -15,3 +15,7 @@ Duration Duration::operator+(const Duration& other) const {
     // Going through the constructor keeps the invariant check in one place.
     return Duration(0, m_total_seconds + other.m_total_seconds);
 }
+
+bool Duration::operator==(const Duration& other) const {
+    return m_total_seconds == other.m_total_seconds;
+}

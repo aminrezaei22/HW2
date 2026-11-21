@@ -30,6 +30,13 @@ public:
      */
     Duration operator+(const Duration& other) const;
 
+    /**
+     * @brief Compares two durations by their total seconds.
+     * @param other Duration to compare against.
+     * @return true when both hold the same total seconds.
+     */
+    bool operator==(const Duration& other) const;
+
 private:
     int m_total_seconds;
 };
