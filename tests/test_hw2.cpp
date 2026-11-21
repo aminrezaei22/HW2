@@ -135,3 +135,17 @@ TEST(FindTrack, EmptyPlaylistReturnsNull) {
     Playlist playlist(2);
     EXPECT_EQ(playlist.find_track("Static"), nullptr);
 }
+
+TEST(TotalLength, EmptyPlaylistIsZero) {
+    Playlist playlist(2);
+    EXPECT_TRUE(playlist.total_length() == Duration());
+}
+
+TEST(TotalLength, SumsEveryStoredTrack) {
+    Playlist playlist(4);
+    playlist.add_track({"Midnight Drive", Duration(3, 42)});
+    playlist.add_track({"Neon Rain", Duration(4, 5)});
+    playlist.add_track({"Static", Duration(2, 58)});
+    playlist.add_track({"Low Tide", Duration(5, 11)});
+    EXPECT_TRUE(playlist.total_length() == Duration(15, 56));
+}
