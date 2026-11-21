@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <sstream>
+
 #include "duration.h"
 #include "playlist.h"
 #include "track.h"
@@ -24,6 +26,46 @@ TEST(DurationConstructor, NegativeSecondsTakeFromMinutes) {
 TEST(DurationConstructor, NegativeTotalClampsToZero) {
     EXPECT_EQ(Duration(0, -5).total_seconds(), 0);
     EXPECT_EQ(Duration(-2, 10).total_seconds(), 0);
+}
+
+TEST(DurationPlus, AddsTotals) {
+    Duration sum = Duration(3, 42) + Duration(4, 5);
+    EXPECT_EQ(sum.total_seconds(), 467);
+}
+
+TEST(DurationPlus, LeavesOperandsUnchanged) {
+    Duration first(1, 30);
+    Duration second(0, 45);
+    Duration sum = first + second;
+    EXPECT_EQ(sum.total_seconds(), 135);
+    EXPECT_EQ(first.total_seconds(), 90);
+    EXPECT_EQ(second.total_seconds(), 45);
+}
+
+TEST(DurationEquals, SameTotalIsEqual) {
+    EXPECT_TRUE(Duration(1, 15) == Duration(0, 75));
+}
+
+TEST(DurationEquals, DifferentTotalIsNotEqual) {
+    EXPECT_FALSE(Duration(1, 15) == Duration(1, 16));
+}
+
+TEST(DurationOutput, PrintsMinutesAndTwoDigitSeconds) {
+    std::ostringstream out;
+    out << Duration(3, 5);
+    EXPECT_EQ(out.str(), "3:05");
+}
+
+TEST(DurationOutput, PrintsZeroDuration) {
+    std::ostringstream out;
+    out << Duration();
+    EXPECT_EQ(out.str(), "0:00");
+}
+
+TEST(DurationOutput, CallsCanChain) {
+    std::ostringstream out;
+    out << Duration(0, 75) << " and " << Duration(12, 34);
+    EXPECT_EQ(out.str(), "1:15 and 12:34");
 }
 
 TEST(PlaylistConstructor, StartsEmpty) {
