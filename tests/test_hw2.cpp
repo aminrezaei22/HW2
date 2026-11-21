@@ -62,3 +62,34 @@ TEST(AddTrack, EmptyTitleIsRefused) {
     EXPECT_FALSE(playlist.add_track({"", Duration(1, 0)}));
     EXPECT_EQ(playlist.size(), 0);
 }
+
+TEST(FindTrack, FindsStoredTrack) {
+    Playlist playlist(3);
+    playlist.add_track({"Neon Rain", Duration(4, 5)});
+    playlist.add_track({"Static", Duration(2, 58)});
+    const Track* found = playlist.find_track("Static");
+    ASSERT_NE(found, nullptr);
+    EXPECT_EQ(found->title, "Static");
+    EXPECT_EQ(found->length.total_seconds(), 178);
+}
+
+TEST(FindTrack, ReturnsFirstOfMatchingTitles) {
+    Playlist playlist(2);
+    playlist.add_track({"Static", Duration(2, 58)});
+    playlist.add_track({"Static", Duration(9, 0)});
+    const Track* found = playlist.find_track("Static");
+    ASSERT_NE(found, nullptr);
+    EXPECT_EQ(found->length.total_seconds(), 178);
+}
+
+TEST(FindTrack, MissingTitleReturnsNull) {
+    Playlist playlist(2);
+    playlist.add_track({"Static", Duration(2, 58)});
+    EXPECT_EQ(playlist.find_track("Missing"), nullptr);
+    EXPECT_EQ(playlist.find_track("static"), nullptr);
+}
+
+TEST(FindTrack, EmptyPlaylistReturnsNull) {
+    Playlist playlist(2);
+    EXPECT_EQ(playlist.find_track("Static"), nullptr);
+}
