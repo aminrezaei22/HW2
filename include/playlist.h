@@ -1,6 +1,8 @@
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
 
+#include <string>
+
 #include "track.h"
 
 /**
@@ -35,6 +37,13 @@ public:
      * @return Track count, from 0 up to the capacity.
      */
     int size() const;
+
+    /**
+     * @brief Looks for the first stored track with an exactly matching title.
+     * @param title Title to search for.
+     * @return Read-only pointer to the track, or nullptr if no title matches.
+     */
+    const Track* find_track(const std::string& title) const;
 
     // Copying is not covered yet; deleting these keeps two Playlists from
     // sharing one array and freeing it twice.
