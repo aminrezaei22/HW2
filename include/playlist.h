@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "duration.h"
 #include "track.h"
 
 /**
@@ -37,6 +38,12 @@ public:
      * @return Track count, from 0 up to the capacity.
      */
     int size() const;
+
+    /**
+     * @brief Adds up the length of every stored track.
+     * @return The combined length, or 0:00 for an empty playlist.
+     */
+    Duration total_length() const;
 
     /**
      * @brief Looks for the first stored track with an exactly matching title.
