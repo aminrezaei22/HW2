@@ -17,6 +17,12 @@ public:
      */
     Duration(int minutes = 0, int seconds = 0);
 
+    /**
+     * @brief Gets the whole duration in seconds.
+     * @return Total seconds, never negative.
+     */
+    int total_seconds() const;
+
 private:
     int m_total_seconds;
 };

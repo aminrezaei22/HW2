@@ -6,3 +6,7 @@ Duration::Duration(int minutes, int seconds) : m_total_seconds(minutes * 60 + se
         m_total_seconds = 0;
     }
 }
+
+int Duration::total_seconds() const {
+    return m_total_seconds;
+}
