@@ -23,6 +23,14 @@ public:
     ~Playlist();
 
     /**
+     * @brief Copies a track onto the end of the playlist.
+     * @param track Track to store. Its title must not be empty.
+     * @return false, changing nothing, if the playlist is full or the title is
+     *         empty; otherwise true.
+     */
+    bool add_track(const Track& track);
+
+    /**
      * @brief Gets the number of tracks stored.
      * @return Track count, from 0 up to the capacity.
      */
