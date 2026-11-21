@@ -17,6 +17,11 @@ public:
      */
     explicit Playlist(int capacity);
 
+    /**
+     * @brief Releases the track array the constructor allocated.
+     */
+    ~Playlist();
+
     // Copying is not covered yet; deleting these keeps two Playlists from
     // sharing one array and freeing it twice.
     Playlist(const Playlist&) = delete;
