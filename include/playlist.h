@@ -22,6 +22,12 @@ public:
      */
     ~Playlist();
 
+    /**
+     * @brief Gets the number of tracks stored.
+     * @return Track count, from 0 up to the capacity.
+     */
+    int size() const;
+
     // Copying is not covered yet; deleting these keeps two Playlists from
     // sharing one array and freeing it twice.
     Playlist(const Playlist&) = delete;

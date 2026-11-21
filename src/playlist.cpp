@@ -11,3 +11,7 @@ Playlist::Playlist(int capacity) : m_tracks(nullptr), m_count(0), m_capacity(cap
 Playlist::~Playlist() {
     delete[] m_tracks;
 }
+
+int Playlist::size() const {
+    return m_count;
+}
