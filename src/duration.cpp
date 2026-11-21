@@ -19,3 +19,15 @@ Duration Duration::operator+(const Duration& other) const {
 bool Duration::operator==(const Duration& other) const {
     return m_total_seconds == other.m_total_seconds;
 }
+
+std::ostream& operator<<(std::ostream& out, const Duration& d) {
+    int minutes = d.total_seconds() / 60;
+    int seconds = d.total_seconds() % 60;
+    out << minutes << ':';
+    // Seconds always take two digits, so 3:05 does not print as 3:5.
+    if (seconds < 10) {
+        out << '0';
+    }
+    out << seconds;
+    return out;
+}

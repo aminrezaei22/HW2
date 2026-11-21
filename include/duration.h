@@ -1,6 +1,8 @@
 #ifndef DURATION_H
 #define DURATION_H
 
+#include <ostream>
+
 /**
  * @brief A length of time stored as whole seconds.
  *
@@ -40,5 +42,13 @@ public:
 private:
     int m_total_seconds;
 };
+
+/**
+ * @brief Writes a duration as m:ss, for example 3:05.
+ * @param out Stream to write to.
+ * @param d Duration to print.
+ * @return The same stream, so calls can chain.
+ */
+std::ostream& operator<<(std::ostream& out, const Duration& d);
 
 #endif
